@@ -10,17 +10,29 @@ const Task = () => {
         JSON.parse(localStorage.getItem('storedTasks')) || []
     );
     const [showAddTask, setShowAddTask] = React.useState(false)
+    const [filterWord, setFilterWord] = React.useState('all')
 
     useEffect(() => {
         localStorage.setItem('storedTasks', JSON.stringify(tasks))
     }, [tasks])    
 
+    const getBiggestId = () => {
+        let biggestId = 0
+        tasks.forEach((task) => {
+            if (task.id > biggestId) {
+                biggestId = task.id
+            }
+        })
+
+        return biggestId
+    }
+
     const handleNewTask = (task) => {
         const taskObj = {
-            id: tasks.length + 1,
+            id: getBiggestId() + 1,
             title: task.title,
             description: task.description,
-            status: 'en cours',
+            status: 'termine',
             start: new Date().toLocaleDateString('fr-Fr'),
             end: null,
         }
@@ -31,6 +43,10 @@ const Task = () => {
         setShowAddTask(false)
     }
 
+    const handleEditItem = () => {  
+        // TODO
+    }
+
     const handleRemoveItem = (id) => {
         const newTasks = tasks.filter((task) => 
             task.id != id
@@ -38,6 +54,21 @@ const Task = () => {
 
         setTask(newTasks)
     }
+
+    const handleFilter = (e) => {
+        setFilterWord(e.target.value)
+    }
+
+    const filteredTasks = tasks.filter((task) => {
+        if (filterWord === 'all') {
+            return task
+        } else {
+            return task.status === filterWord
+        }
+    }
+    )
+
+    console.log('fitered tasks: ', filteredTasks)
 
 
     return (
@@ -52,10 +83,10 @@ const Task = () => {
                         <div>
                             <label htmlFor="filterbyStatus">Filter: </label>
 
-                            <select name="filter" id="filterbyStatus">
+                            <select name="filter" id="filterbyStatus" onChange={handleFilter}>
                                 <option value="all">Tous</option>
-                                <option value="ongoing">En cours</option>
-                                <option value="done">Terminée</option>
+                                <option value="en cours">En cours</option>
+                                <option value="termine">Terminée</option>
                             </select>
 
                         </div>
@@ -64,7 +95,7 @@ const Task = () => {
                             !tasks ? (
                                 <p className="text-center text-sm text-gray-600">Aucune tâche</p>
                             ) : (
-                                <TaskList list={tasks} handleRemoveItem={handleRemoveItem}/>
+                                <TaskList list={filteredTasks} handleRemoveItem={handleRemoveItem}/>
                             )
                         }
 
