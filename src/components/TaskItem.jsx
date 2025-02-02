@@ -1,6 +1,6 @@
 import { Square, Pencil, Trash2 } from "lucide-react";
 
-const TaskItem = ({ item }) => {
+const TaskItem = ({ item, onRemoveItem}) => {
     return (
         <li>
             <div className="flex items-baseline justify-between gap-4 py-3 px-5">
@@ -33,7 +33,7 @@ const TaskItem = ({ item }) => {
 
                 <div className="flex gap-x-2 ">
                     <Pencil />
-                    <Trash2 className="text-red-500" />
+                    <Trash2 className="text-red-500" onClick={() => onRemoveItem(item.id)} />
                 </div>
             </div>
 

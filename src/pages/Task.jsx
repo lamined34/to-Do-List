@@ -31,6 +31,15 @@ const Task = () => {
         setShowAddTask(false)
     }
 
+    const handleRemoveItem = (id) => {
+        const newTasks = tasks.filter((task) => 
+            task.id != id
+        )
+
+        setTask(newTasks)
+    }
+
+
     return (
         <div className="relative flex flex-col w-full max-w-lg bg-white">
             <h1 className="text-center">To Do List</h1>
@@ -55,7 +64,7 @@ const Task = () => {
                             !tasks ? (
                                 <p className="text-center text-sm text-gray-600">Aucune tâche</p>
                             ) : (
-                                <TaskList list={tasks} />
+                                <TaskList list={tasks} handleRemoveItem={handleRemoveItem}/>
                             )
                         }
 
