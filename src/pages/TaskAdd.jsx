@@ -1,18 +1,15 @@
 import { useForm } from "react-hook-form"
-import { useLocation } from "react-router-dom"
-import { useCallbackContext } from "./CallbackContext"
 
-const TaskAdd = () => {
-    const { callback } = useCallbackContext();
-
+const TaskAdd = ({onSubmitTask}) => {
     const { register, handleSubmit } = useForm()
+
 
     return (
         <>
             <div className="bg-white w-full max-w-lg p-5 space-y-7">
                 <h1 className="text-4xl text-gray-700">Nouvelle Tâche</h1>
 
-                <form onSubmit={handleSubmit(callback)}>
+                <form onSubmit={handleSubmit(onSubmitTask)}>
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col gap-4">
                             <label htmlFor="title">Nom</label>
@@ -25,8 +22,8 @@ const TaskAdd = () => {
                         </div>
 
                         <div className="flex gap-2">
-                            <button>Annuler</button>
-                            <button type="submit" onClick={() => console.log('hello')}>Ajouter</button>
+                            <button type="button">Annuler</button>
+                            <button type="submit">Ajouter</button>
                         </div>
                     </div>
                 </form>
