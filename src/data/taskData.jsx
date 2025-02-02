@@ -1,10 +1,10 @@
 class TaskObj {
-    constructor(id, title, description, status, debut, end) {     
+    constructor(id, title, description, status, start, end) {     
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
-        this.debut = debut;
+        this.start = start;
         this.end = end;
     }
    
