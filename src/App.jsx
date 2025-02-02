@@ -1,12 +1,14 @@
 import React from 'react'
 import './App.css'
+import Task from './pages/Task'
 
 function App() {
 
   return (
     <>
-      <div className='flex justify-center items-center h-screen p-10 bg-gray-100'>
-        
+      <div className='flex justify-center h-screen bg-gray-100'>
+        <Task />
+
       </div>
     </>
   )
