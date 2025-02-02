@@ -1,11 +1,22 @@
-import { tasks } from "../data/taskData";
+import { tasksExamples } from "../data/taskData";
 import TaskList from "../components/TaskList";
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+
+import { useCallbackContext } from "./CallbackContext";
 
 
 const Task = () => {
     const navigate = useNavigate()
+    const { setCallback } = useCallbackContext()
+
+    const [tasks, setTask] = React.useState([...tasksExamples]);
+    
+    const handleNewTask = (task) => {
+        console.log("Trying me?")
+        setTask([...tasks, task]);
+    }
 
     return (
         <div className="relative flex flex-col w-full max-w-lg bg-white">
@@ -25,7 +36,10 @@ const Task = () => {
             <TaskList list={tasks} />
 
             <button 
-            onClick={() => navigate('/addTask')}
+            onClick={() => {
+                setCallback(() => handleNewTask)
+                navigate('/addTask')
+            }}
             className="absolute bottom-16 right-14 shadow-xl h-16 w-16 bg-gray-50 border-2 border-gray-100
             flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:scale-125 hover:shadow-2xl
             hover:-translate-y-3">

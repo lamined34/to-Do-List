@@ -12,7 +12,7 @@ class TaskObj {
 
 
 
-export const tasks = [
+export const tasksExamples = [
     new TaskObj('1', 'Lecture', 'lire 2 pages de livre sur React', 'En cours', '2025-02-01', '2025-02-02'),
     new TaskObj('2', 'Task 2', 'Description 2', 'Terminée', '2025-02-01', '2025-02-02')
 ];
