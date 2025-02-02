@@ -8,21 +8,25 @@ const TaskItem = ({ item }) => {
                     <input type="checkbox" name="" id="" />
 
                     <div className="grid grid-cols-1">
-                        <h2>{item.title}</h2>
+                        <h2 className="capitalize">{item.title}</h2>
 
                         <div className="flex items-baseline gap-x-2 w-full text-xs">
                             <div className="flex items-baseline gap-1">
                                 <Square className=" fill-green-500 w-2 h-2" />
-                                <span>{item.status}</span>
+                                <span >{item.status}</span>
                             </div>
                             <div>
                                 <span>debut: </span>
                                 <span>{item.start}</span>
                             </div>
-                            <div>
-                                <span>fin:</span>
-                                <span>{item.end}</span>
-                            </div>
+                            {
+                                item.end && (
+                                    <div>
+                                        <span>fin:</span>
+                                        <span>{item.end}</span>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

@@ -1,17 +1,30 @@
 import { tasksExamples } from "../data/taskData";
 import TaskList from "../components/TaskList";
 import { Plus } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import TaskAdd from "./TaskAdd";
 
 
 const Task = () => {
-    const [tasks, setTask] = React.useState([...tasksExamples]);
+    const [tasks, setTask] = React.useState(
+        JSON.parse(localStorage.getItem('storedTasks')) || []
+    );
     const [showAddTask, setShowAddTask] = React.useState(false)
 
+    useEffect(() => {
+        localStorage.setItem('storedTasks', JSON.stringify(tasks))
+    }, [tasks])    
+
     const handleNewTask = (task) => {
-        console.log({ ...task })
-        setTask([...tasks, task]);
+        const taskObj = {
+            id: tasks.length + 1,
+            title: task.title,
+            description: task.description,
+            status: 'en cours',
+            start: new Date().toLocaleDateString('fr-Fr'),
+            end: null,
+        }
+        setTask([...tasks, taskObj]);
 
         console.log('mes tâches: ', tasks)
         
