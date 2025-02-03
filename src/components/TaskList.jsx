@@ -3,7 +3,7 @@ import TaskItem from "./TaskItem";
 
 const TaskList = ({list, handleRemoveItem}) => {
     return (
-        <ul>
+        <ul className="w-full">
             {
                 list.map((item) =>
                     <TaskItem  key={item.id} item={item} onRemoveItem={handleRemoveItem} />
